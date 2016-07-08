@@ -27,7 +27,7 @@ r_bing = re.compile(r'<h3><a href="([^"]+)"')
 
 
 def bing_search(query, lang='en-GB'):
-    base = 'http://www.bing.com/search?mkt=%s&q=' % lang
+    base = 'https://www.bing.com/search?mkt=%s&q=' % lang
     bytes = web.get(base + query)
     m = r_bing.search(bytes)
     if m:
@@ -38,7 +38,7 @@ r_duck = re.compile(r'nofollow" class="[^"]+" href="(?!https?:\/\/r\.search\.yah
 
 def duck_search(query):
     query = query.replace('!', '')
-    uri = 'http://duckduckgo.com/html/?q=%s&kl=uk-en' % query
+    uri = 'https://duckduckgo.com/html/?q=%s&kl=uk-en' % query
     bytes = web.get(uri)
     if 'web-result' in bytes:  # filter out the adds on top of the page
         bytes = bytes.split('web-result')[1]
@@ -59,7 +59,7 @@ def duck_api(query):
     # if the query constains special charactares that aren't urlencoded.
     # So in order to always get a JSON response back the query is urlencoded
     query = quote_plus(query)
-    uri = 'http://api.duckduckgo.com/?q=%s&format=json&no_html=1&no_redirect=1' % query
+    uri = 'https://api.duckduckgo.com/?q=%s&format=json&no_html=1&no_redirect=1' % query
     results = json.loads(web.get(uri))
     if results['Redirect']:
         return results['Redirect']
@@ -68,7 +68,7 @@ def duck_api(query):
 
 
 @commands('duck', 'ddg', 'g')
-@example('.duck privacy or .duck !mcwiki obsidian')
+@example('&duck privacy or &duck !mcwiki obsidian')
 def duck(bot, trigger):
     """Queries Duck Duck Go for the specified input."""
     query = trigger.group(2)
@@ -93,11 +93,11 @@ def duck(bot, trigger):
 
 
 @commands('search')
-@example('.search nerdfighter')
+@example('&search nerdfighter')
 def search(bot, trigger):
     """Searches Bing and Duck Duck Go."""
     if not trigger.group(2):
-        return bot.reply('.search for what?')
+        return bot.reply('Search for what?')
     query = trigger.group(2)
     bu = bing_search(query) or '-'
     du = duck_search(query) or '-'
@@ -120,7 +120,7 @@ def suggest(bot, trigger):
     if not trigger.group(2):
         return bot.reply("No query term.")
     query = trigger.group(2)
-    uri = 'http://websitedev.de/temp-bin/suggest.pl?q='
+    uri = 'https://websitedev.de/temp-bin/suggest.pl?q='
     answer = web.get(uri + query.replace('+', '%2B'))
     if answer:
         bot.say(answer)

@@ -93,8 +93,8 @@ def _find_geoip_db(bot):
         return False
 
 
-@commands('iplookup', 'ip')
-@example('.ip 8.8.8.8',
+@commands('oldiplookup', 'oldip', 'ip1', 'iplookup1')
+@example('&ip1 8.8.8.8',
          r'[IP/Host Lookup] Hostname: google-public-dns-a.google.com | Location: United States | Region: CA | ISP: AS15169 Google Inc.',
          re=True,
          ignore='Downloading GeoIP database, please wait...')

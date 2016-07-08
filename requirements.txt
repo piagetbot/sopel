@@ -4,3 +4,5 @@ praw
 pyenchant
 pygeoip
 requests
+ipaddress
+google-api-python-client

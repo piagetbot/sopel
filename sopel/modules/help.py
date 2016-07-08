@@ -11,13 +11,14 @@ from __future__ import unicode_literals, absolute_import, print_function, divisi
 
 import textwrap
 import collections
+import time
 
 from sopel.formatting import bold
 from sopel.module import commands, rule, example, priority
 
 
 @rule('$nick' '(?i)(help|doc) +([A-Za-z]+)(?:\?+)?$')
-@example('.help tell')
+@example('&help tell')
 @commands('help', 'commands')
 @priority('low')
 def help(bot, trigger):
@@ -27,7 +28,7 @@ def help(bot, trigger):
         name = name.lower()
 
         # number of lines of help to show
-        threshold = 3
+        threshold = 5
 
         if name in bot.doc:
             if len(bot.doc[name][0]) + (1 if bot.doc[name][1] else 0) > threshold:
@@ -43,13 +44,8 @@ def help(bot, trigger):
                 msgfun('e.g. ' + bot.doc[name][1])
     else:
         if not trigger.is_privmsg:
-            bot.reply("I'm sending you a list of my commands in a private message!")
-        bot.say(
-            'You can see more info about any of these commands by doing .help '
-            '<command> (e.g. .help time)',
-            trigger.nick
-        )
-
+            bot.reply("I'm sending you a list of my commands now...")
+        bot.notice('You can see more info about any of these commands by doing &help <command> (e.g. &help time)', trigger.nick)
         name_length = max(6, max(len(k) for k in bot.command_groups.keys()))
         for category, cmds in collections.OrderedDict(sorted(bot.command_groups.items())).items():
             category = category.upper().ljust(name_length)
@@ -58,15 +54,15 @@ def help(bot, trigger):
             indent = ' ' * (name_length + 2)
             msg = textwrap.wrap(msg, subsequent_indent=indent)
             for line in msg:
-                bot.say(line, trigger.nick)
-
+                time.sleep(2)
+                bot.notice(line, trigger.nick)
 
 @rule('$nick' r'(?i)help(?:[?!]+)?$')
 @priority('low')
 def help2(bot, trigger):
     response = (
-        'Hi, I\'m a bot. Say ".commands" to me in private for a list ' +
-        'of my commands, or see http://sopel.chat for more ' +
+        'Hi, I\'m a bot. Say "&commands" to me in private for a list ' +
+        'of my commands, or see https://sopel.chat for more ' +
         'general details. My owner is %s.'
     ) % bot.config.core.owner
     bot.reply(response)

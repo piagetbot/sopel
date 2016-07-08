@@ -46,7 +46,7 @@ def mw_search(server, query, num):
     Searches the specified MediaWiki server for the given query, and returns
     the specified number of results.
     """
-    search_url = ('http://%s/w/api.php?format=json&action=query'
+    search_url = ('https://%s/w/api.php?format=json&action=query'
                   '&list=search&srlimit=%d&srprop=timestamp&srwhat=text'
                   '&srsearch=') % (server, num)
     search_url += query
@@ -87,7 +87,7 @@ def mw_snippet(server, query):
     return snippet['extract']
 
 
-@rule('.*/([a-z]+\.wikipedia.org)/wiki/([^ ]+).*')
+#@rule('.*/([a-z]+\.wikipedia.org)/wiki/([^ ]+).*')
 def mw_info(bot, trigger, found_match=None):
     """
     Retrives a snippet of the specified length from the given page on the given
@@ -97,8 +97,8 @@ def mw_info(bot, trigger, found_match=None):
     say_snippet(bot, match.group(1), unquote(match.group(2)), show_url=False)
 
 
-@commands('w', 'wiki', 'wik')
-@example('.w San Francisco')
+@commands('w', 'wiki', 'wik', 'wikipedia')
+@example('&w San Francisco')
 def wikipedia(bot, trigger):
     lang = bot.config.wikipedia.default_lang
 

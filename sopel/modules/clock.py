@@ -45,7 +45,7 @@ def setup(bot):
 
 
 @commands('t', 'time')
-@example('.t America/New_York')
+@example('&t America/New_York')
 def f_time(bot, trigger):
     """Returns the current time."""
     if trigger.group(2):
@@ -61,7 +61,7 @@ def f_time(bot, trigger):
 
 
 @commands('settz', 'settimezone')
-@example('.settz America/New_York')
+@example('&settz America/New_York')
 def update_user(bot, trigger):
     """
     Set your preferred time zone. Most timezones will work, but it's best to
@@ -89,7 +89,7 @@ def update_user(bot, trigger):
 
 
 @commands('gettz', 'gettimezone')
-@example('.gettz [nick]')
+@example('&gettz [nick]')
 def get_user_tz(bot, trigger):
     """
     Gets a user's preferred time zone, will show yours if no user specified
@@ -111,7 +111,7 @@ def get_user_tz(bot, trigger):
 
 
 @commands('settimeformat', 'settf')
-@example('.settf %Y-%m-%dT%T%z')
+@example('&settf %Y-%m-%dT%T%z')
 def update_user_format(bot, trigger):
     """
     Sets your preferred format for time. Uses the standard strftime format. You
@@ -145,7 +145,7 @@ def update_user_format(bot, trigger):
 
 
 @commands('gettimeformat', 'gettf')
-@example('.gettf [nick]')
+@example('&gettf [nick]')
 def get_user_format(bot, trigger):
     """
     Gets a user's preferred time format, will show yours if no user specified
@@ -166,7 +166,7 @@ def get_user_format(bot, trigger):
 
 
 @commands('setchanneltz', 'setctz')
-@example('.setctz America/New_York')
+@example('&setctz America/New_York')
 def update_channel(bot, trigger):
     """
     Set the preferred time zone for the channel.
@@ -196,7 +196,7 @@ def update_channel(bot, trigger):
 
 
 @commands('getchanneltz', 'getctz')
-@example('.getctz [channel]')
+@example('&getctz [channel]')
 def get_channel_tz(bot, trigger):
     """
     Gets the preferred channel timezone, or the current channel timezone if no
@@ -219,7 +219,7 @@ def get_channel_tz(bot, trigger):
 
 
 @commands('setchanneltimeformat', 'setctf')
-@example('.setctf %Y-%m-%dT%T%z')
+@example('&setctf %Y-%m-%dT%T%z')
 def update_channel_format(bot, trigger):
     """
     Sets your preferred format for time. Uses the standard strftime format. You
@@ -257,7 +257,7 @@ def update_channel_format(bot, trigger):
 
 
 @commands('getchanneltimeformat', 'getctf')
-@example('.getctf [channel]')
+@example('&getctf [channel]')
 def get_channel_format(bot, trigger):
     """
     Gets the channel's preferred time format, will return current channel's if

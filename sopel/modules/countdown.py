@@ -14,11 +14,11 @@ import datetime
 @commands('countdown')
 def generic_countdown(bot, trigger):
     """
-    .countdown <year> <month> <day> - displays a countdown to a given date.
+    &countdown <year> <month> <day> - displays a countdown to a given date.
     """
     text = trigger.group(2)
     if not text:
-        bot.say("Please use correct format: .countdown 2012 12 21")
+        bot.say("Please use correct format: &countdown 2012 12 21")
         return NOLIMIT
     text = trigger.group(2).split()
     if text and (len(text) == 3 and text[0].isdigit() and text[1].isdigit()
@@ -27,7 +27,7 @@ def generic_countdown(bot, trigger):
             diff = (datetime.datetime(int(text[0]), int(text[1]), int(text[2]))
                     - datetime.datetime.today())
         except:
-            bot.say("Please use correct format: .countdown 2012 12 21")
+            bot.say("Please use correct format: &countdown 2012 12 21")
             return NOLIMIT
         bot.say(str(diff.days) + " days, " + str(diff.seconds // 3600)
                    + " hours and "
@@ -35,5 +35,5 @@ def generic_countdown(bot, trigger):
                    + " minutes until "
                    + text[0] + " " + text[1] + " " + text[2])
     else:
-        bot.say("Please use correct format: .countdown 2012 12 21")
+        bot.say("Please use correct format: &countdown 2012 12 21")
         return NOLIMIT

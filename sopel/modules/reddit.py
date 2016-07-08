@@ -94,7 +94,7 @@ def rpost_info(bot, trigger, match=None):
 
 # If you change this, you'll have to change some other things...
 @commands('redditor')
-@example('.redditor poem_for_your_sprog')
+@example('&redditor poem_for_your_sprog')
 def redditor_info(bot, trigger, match=None):
     """Show information about the given Redditor"""
     commanded = re.match(bot.config.core.prefix + 'redditor', trigger)
@@ -148,8 +148,8 @@ def auto_redditor_info(bot, trigger):
 
 @require_chanmsg('.setsfw is only permitted in channels')
 @commands('setsafeforwork', 'setsfw')
-@example('.setsfw true')
-@example('.setsfw false')
+@example('&setsfw true')
+@example('&setsfw false')
 def update_channel(bot, trigger):
     """
     Sets the Safe for Work status (true or false) for the current
@@ -170,7 +170,7 @@ def update_channel(bot, trigger):
 
 
 @commands('getsafeforwork', 'getsfw')
-@example('.getsfw [channel]')
+@example('&getsfw [channel]')
 def get_channel_sfw(bot, trigger):
     """
     Gets the preferred channel's Safe for Work status, or the current
