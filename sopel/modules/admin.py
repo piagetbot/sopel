@@ -192,7 +192,7 @@ def set_config(bot, trigger):
             return
         # Except if the option looks like a password. Censor those to stop them
         # from being put on log files.
-        if option.endswith("password") or option.endswith("pass"):
+        if option.endswith("password") or option.endswith("pass") or option.endswith("key"):
             value = "(password censored)"
         else:
             value = getattr(section, option)
@@ -224,10 +224,8 @@ def save_config(bot, trigger):
     bot.reply('Done.')
 
 @sopel.module.commands('admins')
-@sopel.module.example('&admin')
+@sopel.module.example('&admins')
 def get_admins(bot, trigger):
     """Get admins of the bot."""
-    section = getattr(bot.config, "core")
-    option = "admin_accounts"
-    value = getattr(section, option)
+    value = bot.config.core.admins
     bot.reply("%s" % (value))

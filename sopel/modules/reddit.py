@@ -146,7 +146,7 @@ def auto_redditor_info(bot, trigger):
     redditor_info(bot, trigger)
 
 
-@require_chanmsg('.setsfw is only permitted in channels')
+@require_chanmsg('&setsfw is only permitted in channels')
 @commands('setsafeforwork', 'setsfw')
 @example('&setsfw true')
 @example('&setsfw false')

@@ -37,13 +37,13 @@ STRINGS = {
     'TARGET_FULL':            "I can't fit another bomb in %s's pants!",
     'BOMB_PLANTED':           ["Hey, %(target)s! I think there's a bomb in your pants. %(fuse_time)s timer, "
                                "%(wire_num)d wires: %(wire_list)s. Which wire would you like to cut? "
-                               "(respond with %(prefix)scutwire color)",
+                               "(respond with &cutwire color)",
                                "%(target)s, I just saw someone put a bomb down your pants! There are %(wire_num)d "
                                "wires (%(wire_list)s), and I think it's a %(fuse_time)s fuse. Quick, tell me what "
-                               "wire to cut! (respond with %(prefix)scutwire color)",
+                               "wire to cut! (respond with &cutwire color)",
                                "\u306d, %(target)s, there's a stowaway in your pants. It's a bomb on a %(fuse_time)s "
                                "timer. Given where it is, you should probably let me cut one of the %(wire_num)d wires "
-                               "for you. The colors are %(wire_list)s. (respond with %(prefix)scutwire color)"],
+                               "for you. The colors are %(wire_list)s. (respond with &cutwire color)"],
     'BOMB_ANSWER':            "Hey, don't tell %s, but it's the %s wire.",
     'CUT_NO_BOMB':            "You can't cut a wire until someone bombs you, %s.",
     'CUT_NO_WIRE':            "You have to choose a wire to cut.",
@@ -90,7 +90,7 @@ lock = RLock()
 
 
 @commands('bomb')
-@example(".bomb nicky")
+@example("&bomb nicky")
 @require_chanmsg
 def start(bot, trigger):
     """
@@ -160,7 +160,7 @@ def start(bot, trigger):
 
 
 @commands('cutwire')
-@example(".cutwire red")
+@example("&cutwire red")
 @require_chanmsg
 def cutwire(bot, trigger):
     """
@@ -204,7 +204,7 @@ def cutwire(bot, trigger):
 
 
 @commands('bombcancel', 'cancelbomb')
-@example('.bombcancel unfortunateuser')
+@example('&bombcancel unfortunateuser')
 @require_chanmsg
 def cancel_bomb(bot, trigger):
     """
@@ -286,8 +286,8 @@ def bomb_glue(bot, trigger):
 
 
 @commands('bombstats', 'bombs')
-@example(".bombstats")
-@example(".bombs myfriend")
+@example("&bombstats")
+@example("&bombs myfriend")
 def bombstats(bot, trigger):
     """
     Get bomb stats for yourself or another user.
@@ -328,7 +328,7 @@ def bombstats(bot, trigger):
 
 
 @commands('bombstatreset')
-@example(".bombstatreset spammer")
+@example("&bombstatreset spammer")
 @require_owner('Only the bot owner can reset bomb stats')
 def statreset(bot, trigger):
     """
@@ -345,7 +345,7 @@ def statreset(bot, trigger):
 
 
 @commands('bomboff')
-@example(".bomboff")
+@example("&bomboff")
 def exclude(bot, trigger):
     """
     Disable bombing yourself (admins: or another user)
@@ -366,7 +366,7 @@ def exclude(bot, trigger):
 
 
 @commands('bombon')
-@example(".bombon")
+@example("&bombon")
 def unexclude(bot, trigger):
     """
     Re-enable bombing yourself (admins: or another user)
@@ -383,7 +383,7 @@ def unexclude(bot, trigger):
 
 
 @commands('bombkickoff')
-@example(".bombkickoff")
+@example("&bombkickoff")
 @require_privilege(OP, STRINGS['OP_DISABLE_KICKS'])
 @require_chanmsg
 def nokick(bot, trigger):
@@ -395,7 +395,7 @@ def nokick(bot, trigger):
 
 
 @commands('bombkickon')
-@example(".bombkickon")
+@example("&bombkickon")
 @require_privilege(OP, STRINGS['OP_ENABLE_KICKS'])
 @require_chanmsg
 def yeskick(bot, trigger):
@@ -407,7 +407,7 @@ def yeskick(bot, trigger):
 
 
 @commands('bombsoff')
-@example(".bombsoff")
+@example("&bombsoff")
 @require_privilege(ADMIN, "")
 @require_chanmsg
 def bombnazi(bot, trigger):
@@ -419,7 +419,7 @@ def bombnazi(bot, trigger):
 
 
 @commands('bombson')
-@example(".bombson")
+@example("&bombson")
 @require_privilege(ADMIN, STRINGS['ADMIN_ENABLE_BOMBS'])
 @require_chanmsg
 def bomboprah(bot, trigger):

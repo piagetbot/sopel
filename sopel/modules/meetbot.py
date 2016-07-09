@@ -14,7 +14,7 @@ from sopel.config.types import (
 )
 from sopel.web import quote
 from sopel.modules.url import find_title
-from sopel.module import example, commands, rule, priority
+from sopel.module import example, commands, rule, priority, require_admin
 from sopel.tools import Ddict, Identifier
 import codecs
 
@@ -143,8 +143,9 @@ def ischair(nick, channel):
 
 
 #Start meeting (also preforms all required sanity checks)
+@sopel.module.require_admin
 @commands('startmeeting')
-@example('.startmeeting title or .startmeeting')
+@example('&startmeeting title or &startmeeting')
 def startmeeting(bot, trigger):
     """
     Start a meeting.
@@ -186,7 +187,7 @@ def startmeeting(bot, trigger):
     logplain('Meeting started by ' + trigger.nick.lower(), trigger.sender)
     logHTML_start(trigger.sender)
     meeting_actions[trigger.sender] = []
-    bot.say('Meeting started! use .action, .agreed, .info, .chairs, .subject and .comments to control the meeting. to end the meeting, type .endmeeting')
+    bot.say('Meeting started! use &action, &agreed, &info, &chairs, &subject and &comments to control the meeting. to end the meeting, type &endmeeting')
     bot.say('Users without speaking permission can use .comment ' +
             trigger.sender + ' followed by their comment in a PM with me to '
             'vocalize themselves.')
@@ -194,7 +195,7 @@ def startmeeting(bot, trigger):
 
 #Change the current subject (will appear as <h3> in the HTML log)
 @commands('subject')
-@example('.subject roll call')
+@example('&subject roll call')
 def meetingsubject(bot, trigger):
     """
     Change the meeting subject.
@@ -219,7 +220,7 @@ def meetingsubject(bot, trigger):
 
 #End the meeting
 @commands('endmeeting')
-@example('.endmeeting')
+@example('&endmeeting')
 def endmeeting(bot, trigger):
     """
     End a meeting.
@@ -244,7 +245,7 @@ def endmeeting(bot, trigger):
 
 #Set meeting chairs (people who can control the meeting)
 @commands('chairs')
-@example('.chairs Tyrope Jason elad')
+@example('&chairs Tyrope Jason elad')
 def chairs(bot, trigger):
     """
     Set the meeting chairs.
@@ -268,7 +269,7 @@ def chairs(bot, trigger):
 
 #Log action item in the HTML log
 @commands('action')
-@example('.action elad will develop a meetbot')
+@example('&action elad will develop a meetbot')
 def meetingaction(bot, trigger):
     """
     Log an action in the meeting log
@@ -278,7 +279,7 @@ def meetingaction(bot, trigger):
         bot.say('Can\'t do that, start meeting first')
         return
     if not trigger.group(2):
-        bot.say('try .action someone will do something')
+        bot.say('try &action someone will do something')
         return
     if not ischair(trigger.nick, trigger.sender):
         bot.say('Only meeting head or chairs can do that')
@@ -290,7 +291,7 @@ def meetingaction(bot, trigger):
 
 
 @commands('listactions')
-@example('.listactions')
+@example('&listactions')
 def listactions(bot, trigger):
     if not ismeetingrunning(trigger.sender):
         bot.say('Can\'t do that, start meeting first')
@@ -301,7 +302,7 @@ def listactions(bot, trigger):
 
 #Log agreed item in the HTML log
 @commands('agreed')
-@example('.agreed Bowties are cool')
+@example('&agreed Bowties are cool')
 def meetingagreed(bot, trigger):
     """
     Log an agreement in the meeting log.
@@ -311,7 +312,7 @@ def meetingagreed(bot, trigger):
         bot.say('Can\'t do that, start meeting first')
         return
     if not trigger.group(2):
-        bot.say('try .action someone will do something')
+        bot.say('try &agreed Bowties are cool')
         return
     if not ischair(trigger.nick, trigger.sender):
         bot.say('Only meeting head or chairs can do that')
@@ -323,7 +324,7 @@ def meetingagreed(bot, trigger):
 
 #Log link item in the HTML log
 @commands('link')
-@example('.link http://example.com')
+@example('&link http://example.com')
 def meetinglink(bot, trigger):
     """
     Log a link in the meeing log.
@@ -333,7 +334,7 @@ def meetinglink(bot, trigger):
         bot.say('Can\'t do that, start meeting first')
         return
     if not trigger.group(2):
-        bot.say('try .action someone will do something')
+        bot.say('try &link http://example.com')
         return
     if not ischair(trigger.nick, trigger.sender):
         bot.say('Only meeting head or chairs can do that')
@@ -352,7 +353,7 @@ def meetinglink(bot, trigger):
 
 #Log informational item in the HTML log
 @commands('info')
-@example('.info all board members present')
+@example('&info all board members present')
 def meetinginfo(bot, trigger):
     """
     Log an informational item in the meeting log
@@ -362,7 +363,7 @@ def meetinginfo(bot, trigger):
         bot.say('Can\'t do that, start meeting first')
         return
     if not trigger.group(2):
-        bot.say('try .info some informative thing')
+        bot.say('try &info some informative thing')
         return
     if not ischair(trigger.nick, trigger.sender):
         bot.say('Only meeting head or chairs can do that')
@@ -391,13 +392,13 @@ def take_comment(bot, trigger):
     Intended to allow commentary from those outside the primary group of people
     in the meeting.
 
-    Used in private message only, as `.comment <#channel> <comment to add>`
+    Used in private message only, as `&comment <#channel> <comment to add>`
     https://github.com/sopel-irc/sopel/wiki/Using-the-meetbot-module
     """
     if not trigger.sender.is_nick():
         return
     if not trigger.group(4):  # <2 arguements were given
-        bot.say('Usage: .comment <#channel> <comment to add>')
+        bot.say('Usage: &comment <#channel> <comment to add>')
         return
 
     target, message = trigger.group(2).split(None, 1)
@@ -414,7 +415,7 @@ def take_comment(bot, trigger):
 @commands('comments')
 def show_comments(bot, trigger):
     """
-    Show the comments that have been logged for this meeting with .comment.
+    Show the comments that have been logged for this meeting with &comment.
     https://github.com/sopel-irc/sopel/wiki/Using-the-meetbot-module
     """
     if not ismeetingrunning(trigger.sender):

@@ -13,7 +13,7 @@ from sopel.module import rule, priority, thread
 @rule(r'(?i)(hi|hello|hey),? $nickname[ \t]*$')
 def hello(bot, trigger):
     greeting = random.choice(('Hi', 'Hey', 'Hello', 'How do you do', 'Howdy', 'Welcome', 'Greetings', 'Hiya', 'Good morning/afternoon/evening/night', 'Hullo', 'Good day', 'Yo', 'Buenos dias', 'How are you', 'Aloha', 'Ciao', 'G\'day', 'Bonjour', 'Hail', 'What\'s up', 'How does it', 'S\'up', 'Sup', 'Howdy do', 'What\'s happening', 'Hallo', 'Wassup', 'Heyo', 'Ahoy', 'Gidday', 'Allo', 'Hello there', 'Hola', 'How do', 'What ho', 'Yello', 'Cheerio', 'Halloo', 'Bonsoir', 'Morning/afternoon/evening/night'))
-    punctuation = random.choice(('', '!'))
+    punctuation = random.choice(('', '!', '.'))
     bot.say(greeting + ' ' + trigger.nick + punctuation)
 
 
