@@ -37,13 +37,13 @@ STRINGS = {
     'TARGET_FULL':            "I can't fit another bomb in %s's pants!",
     'BOMB_PLANTED':           ["Hey, %(target)s! I think there's a bomb in your pants. %(fuse_time)s timer, "
                                "%(wire_num)d wires: %(wire_list)s. Which wire would you like to cut? "
-                               "(respond with &cutwire color)",
+                               "(respond with &cutwire colour)",
                                "%(target)s, I just saw someone put a bomb down your pants! There are %(wire_num)d "
                                "wires (%(wire_list)s), and I think it's a %(fuse_time)s fuse. Quick, tell me what "
-                               "wire to cut! (respond with &cutwire color)",
+                               "wire to cut! (respond with &cutwire colour)",
                                "\u306d, %(target)s, there's a stowaway in your pants. It's a bomb on a %(fuse_time)s "
                                "timer. Given where it is, you should probably let me cut one of the %(wire_num)d wires "
-                               "for you. The colors are %(wire_list)s. (respond with &cutwire color)"],
+                               "for you. The colors are %(wire_list)s. (respond with &cutwire colour)"],
     'BOMB_ANSWER':            "Hey, don't tell %s, but it's the %s wire.",
     'CUT_NO_BOMB':            "You can't cut a wire until someone bombs you, %s.",
     'CUT_NO_WIRE':            "You have to choose a wire to cut.",

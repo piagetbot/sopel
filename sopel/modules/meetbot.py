@@ -143,7 +143,7 @@ def ischair(nick, channel):
 
 
 #Start meeting (also preforms all required sanity checks)
-@sopel.module.require_admin
+@require_admin
 @commands('startmeeting')
 @example('&startmeeting title or &startmeeting')
 def startmeeting(bot, trigger):

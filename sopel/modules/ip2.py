@@ -21,7 +21,7 @@ def ip2(bot, trigger):
     """IP Lookup tool"""
     if not trigger.group(2):
         return bot.reply("No search term. Please provide an IP address.")
-    query = trigger.group(2)
+    query = trigger.group(3)
     try:
         ipaddress.ip_address(query)
     except ValueError:
@@ -38,7 +38,7 @@ def ip2(bot, trigger):
     if r.json()['as']:
         asname = ' (AS Name: ' + r.json()['as'] + ')'
         response += asname
-    r2 = requests.get('http://iphub.info/api.php?ip=' + query + '&showtype=4&email=tom29739@tools.wmflabs.org')
+    r2 = requests.get('http://legacy.iphub.info/api.php?ip=' + query + '&showtype=4&email=tom29739@tools.wmflabs.org')
     if r2.json()['proxy']:
         proxy = 'YES'
         response += " | Possible proxy/hosting provider: %s" % proxy
