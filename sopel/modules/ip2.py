@@ -11,6 +11,7 @@ import os
 import ipaddress
 import sys
 import requests
+import re
 
 from sopel.config.types import StaticSection, FilenameAttribute
 from sopel.module import commands, example
@@ -25,7 +26,8 @@ def ip2(bot, trigger):
     try:
         ipaddress.ip_address(query)
     except ValueError:
-        return bot.say('Invalid IP address (if a hostname, please resolve to an IP first).')
+        return if not re.match('^([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])(\.([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]{0,61}[a-zA-Z0-9]))*$', query):
+            return bot.say('Invalid IP address/hostname (if a hostname, try resolving it to an IP first).')
     r = requests.get('http://ip-api.com/json/' + query + '?fields=187072')
     if r.json()['status'] != 'success':
         return bot.say('Unknown error: ' + r.json()['message'])
