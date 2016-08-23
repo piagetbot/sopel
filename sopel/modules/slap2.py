@@ -1,6 +1,6 @@
 """
 slap.py - Slap Module
-Copyright 2009, Michael Yanovich, yanovich.net
+Copyright 2016, tom29739
 
 http://sopel.chat
 """
@@ -14,4 +14,9 @@ verbs = ['slaps', 'kicks', 'destroys', 'annihilates', 'punches', 'roundhouse kic
 @commands('slap', 'slaps')
 def slap1(bot, trigger):
     """&slap <target> - Slaps <target>"""
-    bot.action(random.choice(verbs) + trigger.group(2))
+    nick = trigger.group(2)
+    if not trigger.group(2):
+        nick = trigger.nick
+    if trigger.group(2) == bot.nick:
+        return bot.say("I may be a bot, but I'm not stupid enough to slap myself.")
+    bot.action(random.choice(verbs) + ' ' + nick)

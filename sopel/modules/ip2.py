@@ -26,7 +26,7 @@ def ip2(bot, trigger):
     try:
         ipaddress.ip_address(query)
     except ValueError:
-        return if not re.match('^([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])(\.([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]{0,61}[a-zA-Z0-9]))*$', query):
+        if not re.match('^([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])(\.([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]{0,61}[a-zA-Z0-9]))*$', query):
             return bot.say('Invalid IP address/hostname (if a hostname, try resolving it to an IP first).')
     r = requests.get('http://ip-api.com/json/' + query + '?fields=187072')
     if r.json()['status'] != 'success':
