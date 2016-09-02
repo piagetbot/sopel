@@ -16,4 +16,4 @@ def wplink(bot, trigger):
     #No input
     if not trigger.group(2):
         return bot.say('https://en.wikipedia.org/')
-    bot.say('https://en.wikipedia.org/wiki/' + trigger.group(2).replace(' ', '_'))
+    bot.say('enwp.org/' + trigger.group(2).replace(' ', '_'))
