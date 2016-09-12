@@ -78,3 +78,7 @@ def ctcp_time(bot, trigger):
     current_time = dt.strftime("%A, %d. %B %Y %I:%M%p")
     bot.write(('NOTICE', trigger.nick),
               '\x01TIME {0}\x01'.format(current_time))
+
+@commands('changes', 'commits', 'changelog')
+def changelog(bot, trigger):
+    bot.say(trigger.nick + ", my changelog can be found at https://goo.gl/NWIv5o")
