@@ -16,7 +16,7 @@ from sopel.tools.time import get_timezone, format_time
 from sopel.module import commands, rule, priority, thread
 
 
-@commands('seen')
+@commands('seen', 'lastonline')
 def seen(bot, trigger):
     """Reports when and where the user was last seen."""
     if not trigger.group(2):
