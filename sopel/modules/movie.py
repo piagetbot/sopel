@@ -24,8 +24,9 @@ def movie(bot, trigger):
     if not trigger.group(2):
         return
     word = trigger.group(2).rstrip()
-    uri = "https://www.omdbapi.com/"
-    data = requests.get(uri, params={'t': word}, timeout=30).json()
+    uri = "http://www.omdbapi.com/"
+    data = requests.get(uri, params={'t': word}, timeout=30,
+                        verify=bot.config.core.verify_ssl).json()
     if data['Response'] == 'False':
         if 'Error' in data:
             message = '[MOVIE] %s' % data['Error']
