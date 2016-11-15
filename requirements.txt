@@ -8,4 +8,4 @@ ipaddress
 google-api-python-client
 requests>=2.0.0,<2.11.0
 arrow
-http://tools-docker-builder-01.eqiad.wmflabs/pyenchant-1.6.7-py2.py3.cp27.cp32.cp33.cp34.cp35.pp27.pp33-none-any.whl
+pyenchant
