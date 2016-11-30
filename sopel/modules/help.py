@@ -70,8 +70,8 @@ def help(bot, trigger):
                 return
             bot.memory['command-gist'] = (len(bot.command_groups), url)
         bot.say("I've posted a list of my commands at {} - You can see "
-                "more info about any of these commands by doing .help "
-                "<command> (e.g. .help time)".format(url))
+                "more info about any of these commands by doing &help "
+                "<command> (e.g. &help time)".format(url))
 
 
 def create_gist(bot, msg):
