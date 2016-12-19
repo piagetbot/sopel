@@ -34,14 +34,22 @@ spoiler_subs = [
     'onepunchman',
 ]
 
+from sopel.config.types import StaticSection, ValidatedAttribute
+class RedditSection(StaticSection):
+    client_id = ValidatedAttribute('client_id', str)
+    client_secret = ValidatedAttribute('client_secret', str)
 
 def setup(bot):
+    bot.config.define_section('reddit', RedditSection)
     if not bot.memory.contains('url_callbacks'):
         bot.memory['url_callbacks'] = SopelMemory()
     bot.memory['url_callbacks'][post_regex] = rpost_info
     bot.memory['url_callbacks'][user_regex] = redditor_info
-    bot.config.define_section('reddit', RedditSection)
 
+def configure(config):
+    config.define_section('reddit', RedditSection, validate=False)
+    config.reddit.configure_setting('client_id', 'Please enter a Reddit API client ID.')
+    config.reddit.configure_setting('client_secret', 'Please enter a Reddit API client secret.')
 
 def shutdown(bot):
     del bot.memory['url_callbacks'][post_regex]
