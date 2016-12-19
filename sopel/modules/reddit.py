@@ -40,6 +40,7 @@ def setup(bot):
         bot.memory['url_callbacks'] = SopelMemory()
     bot.memory['url_callbacks'][post_regex] = rpost_info
     bot.memory['url_callbacks'][user_regex] = redditor_info
+    bot.config.define_section('reddit', RedditSection)
 
 
 def shutdown(bot):
