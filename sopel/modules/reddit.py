@@ -2,7 +2,8 @@
 # Author: Elsie Powell, embolalia.com
 from __future__ import unicode_literals, absolute_import, print_function, division
 
-from sopel.module import bot, commands, rule, example, require_chanmsg, NOLIMIT, OP
+import sopel.config
+from sopel.module import commands, rule, example, require_chanmsg, NOLIMIT, OP
 from sopel.formatting import bold, color, colors
 from sopel.web import USER_AGENT
 from sopel.tools import SopelMemory, time
