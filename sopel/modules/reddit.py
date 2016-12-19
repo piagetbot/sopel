@@ -22,8 +22,8 @@ else:
     from HTMLParser import HTMLParser
     unescape = HTMLParser().unescape
 
-client_id = config.reddit.client_id
-client_secret = config.reddit.client_secret
+client_id = sopel.config.reddit.client_id
+client_secret = sopel.config.reddit.client_secret
 domain = r'https?://(?:www\.|np\.)?reddit\.com'
 post_url = '%s/r/(.*?)/comments/([\w-]+)' % domain
 user_url = '%s/u(ser)?/([\w-]+)' % domain
