@@ -57,7 +57,7 @@ def shutdown(bot):
 def rpost_info(bot, trigger, match=None):
     r = praw.Reddit(user_agent=USER_AGENT,client_id=bot.config.reddit.client_id,client_secret=bot.config.reddit.client_secret)
     match = match or trigger
-    s = r.get_submission(submission_id=match.group(2))
+    s = r.submission(id=match.group(2))
 
     message = ('[REDDIT] {title} {link}{nsfw} | {points} points ({percent}) | '
                '{comments} comments | Posted by {author} | '
