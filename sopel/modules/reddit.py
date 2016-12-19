@@ -21,7 +21,8 @@ else:
     from HTMLParser import HTMLParser
     unescape = HTMLParser().unescape
 
-
+client_id = bot.config.reddit.client_id
+client_secret = bot.config.reddit.client_secret
 domain = r'https?://(?:www\.|np\.)?reddit\.com'
 post_url = '%s/r/(.*?)/comments/([\w-]+)' % domain
 user_url = '%s/u(ser)?/([\w-]+)' % domain
@@ -47,7 +48,7 @@ def shutdown(bot):
 
 @rule('.*%s.*' % post_url)
 def rpost_info(bot, trigger, match=None):
-    r = praw.Reddit(user_agent=USER_AGENT)
+    r = praw.Reddit(user_agent=USER_AGENT,client_id=client_id,client_secret=client_secret)
     match = match or trigger
     s = r.get_submission(submission_id=match.group(2))
 
@@ -107,7 +108,7 @@ def rpost_info(bot, trigger, match=None):
 def redditor_info(bot, trigger, match=None):
     """Show information about the given Redditor"""
     commanded = re.match(bot.config.core.prefix + 'redditor', trigger)
-    r = praw.Reddit(user_agent=USER_AGENT)
+    r = praw.Reddit(user_agent=USER_AGENT,client_id=client_id,client_secret=client_secret)
     match = match or trigger
     try:
         u = r.get_redditor(match.group(2))
