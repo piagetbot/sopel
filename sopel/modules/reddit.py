@@ -22,8 +22,6 @@ else:
     from HTMLParser import HTMLParser
     unescape = HTMLParser().unescape
 
-client_id = sopel.config.reddit.client_id
-client_secret = sopel.config.reddit.client_secret
 domain = r'https?://(?:www\.|np\.)?reddit\.com'
 post_url = '%s/r/(.*?)/comments/([\w-]+)' % domain
 user_url = '%s/u(ser)?/([\w-]+)' % domain
@@ -55,6 +53,8 @@ def shutdown(bot):
     del bot.memory['url_callbacks'][post_regex]
     del bot.memory['url_callbacks'][user_regex]
 
+client_id = sopel.config.reddit.client_id
+client_secret = sopel.config.reddit.client_secret
 
 @rule('.*%s.*' % post_url)
 def rpost_info(bot, trigger, match=None):
