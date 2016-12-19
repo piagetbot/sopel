@@ -2,7 +2,7 @@
 # Author: Elsie Powell, embolalia.com
 from __future__ import unicode_literals, absolute_import, print_function, division
 
-from sopel.module import commands, rule, example, require_chanmsg, NOLIMIT, OP
+from sopel.module import config, commands, rule, example, require_chanmsg, NOLIMIT, OP
 from sopel.formatting import bold, color, colors
 from sopel.web import USER_AGENT
 from sopel.tools import SopelMemory, time
@@ -21,8 +21,8 @@ else:
     from HTMLParser import HTMLParser
     unescape = HTMLParser().unescape
 
-client_id = bot.config.reddit.client_id
-client_secret = bot.config.reddit.client_secret
+client_id = config.reddit.client_id
+client_secret = config.reddit.client_secret
 domain = r'https?://(?:www\.|np\.)?reddit\.com'
 post_url = '%s/r/(.*?)/comments/([\w-]+)' % domain
 user_url = '%s/u(ser)?/([\w-]+)' % domain
