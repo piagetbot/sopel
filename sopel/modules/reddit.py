@@ -118,7 +118,7 @@ def redditor_info(bot, trigger, match=None):
     r = praw.Reddit(user_agent=USER_AGENT,client_id=bot.config.reddit.client_id,client_secret=bot.config.reddit.client_secret)
     match = match or trigger
     try:
-        u = r.get_redditor(match.group(2))
+        u = r.redditor(name=match.group(2))
     except:
         if commanded:
             bot.say('No such Redditor.')
