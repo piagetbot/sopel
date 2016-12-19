@@ -53,12 +53,9 @@ def shutdown(bot):
     del bot.memory['url_callbacks'][post_regex]
     del bot.memory['url_callbacks'][user_regex]
 
-client_id = sopel.config.reddit.client_id
-client_secret = sopel.config.reddit.client_secret
-
 @rule('.*%s.*' % post_url)
 def rpost_info(bot, trigger, match=None):
-    r = praw.Reddit(user_agent=USER_AGENT,client_id=client_id,client_secret=client_secret)
+    r = praw.Reddit(user_agent=USER_AGENT,client_id=bot.config.reddit.client_id,client_secret=bot.config.reddit.client_secret)
     match = match or trigger
     s = r.get_submission(submission_id=match.group(2))
 
@@ -118,7 +115,7 @@ def rpost_info(bot, trigger, match=None):
 def redditor_info(bot, trigger, match=None):
     """Show information about the given Redditor"""
     commanded = re.match(bot.config.core.prefix + 'redditor', trigger)
-    r = praw.Reddit(user_agent=USER_AGENT,client_id=client_id,client_secret=client_secret)
+    r = praw.Reddit(user_agent=USER_AGENT,client_id=bot.config.reddit.client_id,client_secret=bot.config.reddit.client_secret)
     match = match or trigger
     try:
         u = r.get_redditor(match.group(2))
