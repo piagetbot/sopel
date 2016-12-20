@@ -23,7 +23,7 @@ def elig(bot, trigger):
     need_months_registered = 3
 
     if not trigger.group(2):
-        return bot.say('To be eligible for a cloak you need: ' + ['', 'a verified email, '][need_verified_email] + 'to be registered for ' + str(need_months_registered) + ' months on the English Wikipedia,' + ' and have ' + str(need_edit_count) + ' edits on the English Wikipedia.')
+        return bot.say('To be eligible for a cloak you need: ' + ['', 'a verified email, '][need_verified_email] + 'to be registered for ' + str(need_months_registered) + ' months,' + ' and have ' + str(need_edit_count) + ' edits.')
 
     query = trigger.group(3)
 
@@ -38,7 +38,7 @@ def elig(bot, trigger):
 
     actual_edit_count = r.json()['query']['globaluserinfo']['editcount']
     if actual_edit_count < need_edit_count:
-        return bot.say('User: "' + query + '" is ineligible for a cloak because their edit count is not high enough on the English Wikipedia. They need ' + str(need_edit_count - actual_edit_count) + ' more edits on the English Wikipedia to be eligible under this criterion (there may be other reasons why this user is ineligible).')
+        return bot.say('User: "' + query + '" is ineligible for a cloak because their edit count is not high enough. They need ' + str(need_edit_count - actual_edit_count) + ' more edits to be eligible under this criterion (there may be other reasons why this user is ineligible).')
 
     r2 = requests.get('https://en.wikipedia.org/w/api.php?action=query&list=users&ususers=' + query + '&usprop=emailable&format=json')
     try:
