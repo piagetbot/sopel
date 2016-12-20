@@ -8,5 +8,5 @@ ipaddress
 google-api-python-client
 oauth2client<4.0.0
 requests>=2.0.0,<2.11.0
-arrow
 pyenchant
+pendulum
