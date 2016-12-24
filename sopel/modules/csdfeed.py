@@ -15,9 +15,7 @@ from sopel.module import commands, example
 def setup(bot):
     logging.basicConfig(level=logging.WARNING)
 
-@event('JOIN')
 @commands('startcsdfeed')
-@nickname_commands('start')
 @example('&startcsdfeed')
 def startcsdfeed(bot, trigger):
     """CSD feed"""
