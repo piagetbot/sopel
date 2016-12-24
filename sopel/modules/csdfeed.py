@@ -7,6 +7,7 @@
 from __future__ import unicode_literals, absolute_import, print_function, division
 
 import logging
+import re
 from socketIO_client import SocketIO, BaseNamespace
 
 from sopel.config.types import StaticSection, FilenameAttribute
