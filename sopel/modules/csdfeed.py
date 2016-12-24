@@ -25,7 +25,7 @@ def startcsdfeed(bot, trigger):
             if change['type'] == 'categorize':
                 if change['title'] == 'Category:Candidates for speedy deletion':
                     if re.search('.\]\] added to category$', change['comment']):
-                        logging.INFO(change)
+                        logging.INFO(str(change))
                         strippedtitle = change['comment'].lstrip('[[').rstrip(']] added to category')
                         unspacedstrippedtitle = strippedtitle.replace(' ','_')
                         bot.say('[Page CSD] ' + 'Wiki: ' + change['wiki'] + ' | Page: http://enwp.org/' + unspacedstrippedtitle + ' | User: ' + change['user'])
