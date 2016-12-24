@@ -27,6 +27,7 @@ def startcsdfeed(bot, trigger):
                     if re.search('.\]\] added to category$', change['comment']):
                         strippedtitle = change['comment'].lstrip('[[').rstrip(']] added to category')
                         unspacedstrippedtitle = strippedtitle.replace(' ','_')
+                        print(change)
                         bot.say('[Page CSD] ' + 'Wiki: ' + change['wiki'] + ' | Page: http://enwp.org/' + unspacedstrippedtitle + ' | User: ' + change['user'])
 
         def on_connect(self):
