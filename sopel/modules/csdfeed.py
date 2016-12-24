@@ -14,7 +14,7 @@ from sopel.config.types import StaticSection, FilenameAttribute
 from sopel.module import commands, example
 
 def setup(bot):
-    logging.basicConfig(level=logging.WARNING)
+    logging.basicConfig(level=logging.INFO)
 
 @commands('startcsdfeed')
 @example('&startcsdfeed')
