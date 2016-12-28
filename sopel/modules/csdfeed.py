@@ -1,7 +1,6 @@
 # coding=utf-8
 """Live CSD feed module"""
-# Copyright 2011, Dimitri Molenaars, TyRope.nl,
-# Copyright © 2013, Elad Alfassa <elad@fedoraproject.org>
+# Copyright 2016, tom29739
 # Licensed under the Eiffel Forum License 2.
 
 from __future__ import unicode_literals, absolute_import, print_function, division
@@ -25,7 +24,6 @@ def startcsdfeed(bot, trigger):
             if change['type'] == 'categorize':
                 if change['title'] == 'Category:Candidates for speedy deletion':
                     if re.search('.\]\] added to category$', change['comment']):
-                        logging.INFO("New CSD: " + change['comment'])
                         strippedtitle = change['comment'].lstrip('[[').rstrip(']] added to category')
                         unspacedstrippedtitle = strippedtitle.replace(' ','_')
                         bot.say('[Page CSD] ' + 'Wiki: ' + change['wiki'] + ' | Page: http://enwp.org/' + unspacedstrippedtitle + ' | User: ' + change['user'])
