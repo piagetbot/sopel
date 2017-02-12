@@ -17,6 +17,7 @@ import re
 from sopel.config.types import StaticSection, FilenameAttribute
 from sopel.module import commands, example
 
+
 @commands('ip', 'iplookup', 'iplookup2', 'ip2', 'whois', 'geolocate')
 @example('&ip 8.8.8.8')
 def ip2(bot, trigger):
@@ -27,7 +28,8 @@ def ip2(bot, trigger):
     try:
         ipaddress.ip_address(query)
     except ValueError:
-        if not re.match('^([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])(\.([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]{0,61}[a-zA-Z0-9]))*$', query):
+        if not re.match('^([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])(\.([a-zA-Z0-9]|[a-zA-Z0-9]['
+                        'a-zA-Z0-9\-]{0,61}[a-zA-Z0-9]))*$', query):
             return bot.say('Invalid IP address/hostname (if a hostname, try resolving it to an IP first).')
     r = requests.get('http://ip-api.com/json/' + query + '?fields=187072')
     if r.json()['status'] != 'success':
@@ -50,20 +52,23 @@ def ip2(bot, trigger):
         response += " | Possible proxy/hosting provider: %s" % proxy
     coords = str(r.json()['lat']) + ', ' + str(r.json()['lon'])
     response += " | Coordinates: %s" % coords
-    r3 = requests.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + unicode(r.json()['lat']) + ',' + unicode(r.json()['lon']) + '&key=' + bot.config.google.apikey)
+    r3 = requests.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + unicode(r.json()['lat']) + ',' +
+                      unicode(r.json()['lon']) + '&key=' + bot.config.google.apikey)
     location = r3.json()['results'][1]['formatted_address']
     response += " | Location: %s" % location
     response += " (approximate)"
     try:
         r4 = requests.get('https://en.wikipedia.org/w/api.php?action=query&list=blocks&format=json&bkip=' + query)
-        r4.json()['query']['blocks'][0]['id']
-        response += " | Blocked on enwiki: YES"
-    except:
+        blockid = r4.json()['query']['blocks'][0]['id']
+        response += " | Blocked on enwiki: YES (block ID: %s)" % blockid
+    except ValueError:
         try:
-            r4 = requests.get('https://en.wikipedia.org/w/api.php?action=query&list=globalblocks&format=json&bgip=' + query)
-            r4.json()['query']['globalblocks'][0]['id']
-            response += "| Blocked globally: YES (global block)"
-        except:
+            r4 = requests.get(
+                'https://en.wikipedia.org/w/api.php?action=query&list=globalblocks&format=json&bgip=' + query
+            )
+            globalblockid = r4.json()['query']['globalblocks'][0]['id']
+            response += "| Blocked globally: YES (global block ID: %s)" % globalblockid
+        except ValueError:
             response += " | Blocked on enwiki or globally: NO"
     finally:
         bot.say(response)
