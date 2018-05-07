@@ -46,9 +46,8 @@ def version(bot, trigger):
     bot.reply("Sopel v. {} at commit: {}".format(sopel.__version__, sha))
 
 
-@sopel.module.intent('VERSION')
+@sopel.module.rule('\x01VERSION\x01')
 @sopel.module.rate(20)
-@sopel.module.rule('.*')
 def ctcp_version(bot, trigger):
     print('wat')
     bot.write(('NOTICE', trigger.nick),
@@ -59,7 +58,7 @@ def ctcp_version(bot, trigger):
 @sopel.module.rate(20)
 def ctcp_source(bot, trigger):
     bot.write(('NOTICE', trigger.nick),
-              '\x01SOURCE https://github.com/sopel-irc/sopel/\x01')
+              '\x01SOURCE https://github.com/piagetbot/sopel\x01')
 
 
 @sopel.module.rule('\x01PING\s(.*)\x01')
@@ -79,3 +78,7 @@ def ctcp_time(bot, trigger):
     current_time = dt.strftime("%A, %d. %B %Y %I:%M%p")
     bot.write(('NOTICE', trigger.nick),
               '\x01TIME {0}\x01'.format(current_time))
+
+@sopel.module.commands('changes', 'commits', 'changelog')
+def changelog(bot, trigger):
+    bot.say(trigger.nick + ", my changelog can be found at https://goo.gl/NWIv5o")

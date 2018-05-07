@@ -268,7 +268,8 @@ class Sopel(irc.Bot):
 
     def msg(self, recipient, text, max_messages=1):
         # Deprecated, but way too much of a pain to remove.
-        self.say(text, recipient, max_messages)
+        time.sleep(2)
+        self.say(text, recipient)
 
     def say(self, text, recipient, max_messages=1):
         """Send ``text`` as a PRIVMSG to ``recipient``.

@@ -169,13 +169,13 @@ def _roll_dice(bot, dice_expression):
 @sopel.module.commands("dice")
 @sopel.module.commands("d")
 @sopel.module.priority("medium")
-@sopel.module.example(".roll 3d1+1", 'You roll 3d1+1: (1+1+1)+1 = 4')
-@sopel.module.example(".roll 3d1v2+1", 'You roll 3d1v2+1: (1[+1+1])+1 = 2')
-@sopel.module.example(".roll 2d4", 'You roll 2d4: \(\d\+\d\) = \d', re=True)
-@sopel.module.example(".roll 100d1", '[^:]*: \(100x1\) = 100', re=True)
-@sopel.module.example(".roll 1001d1", 'I only have 1000 dice. =(')
-@sopel.module.example(".roll 1d1 + 1d1", 'You roll 1d1 + 1d1: (1) + (1) = 2')
-@sopel.module.example(".roll 1d1+1d1", 'You roll 1d1+1d1: (1)+(1) = 2')
+@sopel.module.example("&roll 3d1+1", 'You roll 3d1+1: (1+1+1)+1 = 4')
+@sopel.module.example("&roll 3d1v2+1", 'You roll 3d1v2+1: (1[+1+1])+1 = 2')
+@sopel.module.example("&roll 2d4", 'You roll 2d4: \(\d\+\d\) = \d', re=True)
+@sopel.module.example("&roll 100d1", '[^:]*: \(100x1\) = 100', re=True)
+@sopel.module.example("&roll 1001d1", 'I only have 1000 dice. =(')
+@sopel.module.example("&roll 1d1 + 1d1", 'You roll 1d1 + 1d1: (1) + (1) = 2')
+@sopel.module.example("&roll 1d1+1d1", 'You roll 1d1+1d1: (1)+(1) = 2')
 def roll(bot, trigger):
     """.dice XdY[vZ][+N], rolls dice and reports the result.
 
@@ -236,7 +236,7 @@ def roll(bot, trigger):
 @sopel.module.priority("medium")
 def choose(bot, trigger):
     """
-    .choice option1|option2|option3 - Makes a difficult choice easy.
+    &choice option1|option2|option3 - Makes a difficult choice easy.
     """
     if not trigger.group(2):
         return bot.reply('I\'d choose an option, but you didn\'t give me any.')

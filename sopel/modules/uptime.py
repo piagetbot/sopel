@@ -19,7 +19,7 @@ def setup(bot):
 
 @commands('uptime')
 def uptime(bot, trigger):
-    """.uptime - Returns the uptime of Sopel."""
+    """&uptime - Returns the uptime of Sopel."""
     delta = datetime.timedelta(seconds=round((datetime.datetime.utcnow() -
                                               bot.memory["uptime"])
                                              .total_seconds()))

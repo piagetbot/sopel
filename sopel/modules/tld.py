@@ -20,7 +20,7 @@ r_tag = re.compile(r'<(?!!)[^>]+>')
 
 
 @commands('tld')
-@example('.tld ru')
+@example('&tld ru')
 def gettld(bot, trigger):
     """Show information about the given Top Level Domain."""
     page = web.get(uri)

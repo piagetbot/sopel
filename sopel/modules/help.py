@@ -1,4 +1,4 @@
-# coding=utf-8
+﻿#coding=utf-8
 """
 help.py - Sopel Help Module
 Copyright 2008, Sean B. Palmer, inamidst.com
@@ -26,7 +26,7 @@ def setup(bot):
 
 
 @rule('$nick' '(?i)(help|doc) +([A-Za-z]+)(?:\?+)?$')
-@example('.help tell')
+@example('&help tell')
 @commands('help', 'commands')
 @priority('low')
 def help(bot, trigger):
@@ -97,7 +97,6 @@ def create_list(bot, msg):
         logger.error("Invalid result %s", result)
         return
     return result['url']
-
 
 @rule('$nick' r'(?i)help(?:[?!]+)?$')
 @priority('low')

@@ -27,8 +27,7 @@ def formatnumber(n):
 
 r_bing = re.compile(r'<h2(?: class=" b_topTitle")?><a href="([^"]+)"')
 
-
-def bing_search(query, lang='en-US'):
+def bing_search(query, lang='en-GB'):
     base = 'https://www.bing.com/search?mkt=%s&q=' % lang
     bytes = web.get(base + query)
     m = r_bing.search(bytes)
@@ -73,7 +72,7 @@ def duck_api(query):
 
 
 @commands('duck', 'ddg', 'g')
-@example('.duck sopel bot', r'https?:\/\/sopel\.chat\/?', re=True)
+@example('&duck sopel bot', r'https?:\/\/sopel\.chat\/?', re=True)
 def duck(bot, trigger):
     """Queries Duck Duck Go for the specified input."""
     query = trigger.group(2)
@@ -98,7 +97,7 @@ def duck(bot, trigger):
 
 
 @commands('bing')
-@example('.bing sopel bot', r'https?:\/\/sopel\.chat\/?', re=True)
+@example('&bing sopel bot', r'https?:\/\/sopel\.chat\/?', re=True)
 def bing(bot, trigger):
     """Queries Bing for the specified input."""
     if not trigger.group(2):
@@ -112,11 +111,11 @@ def bing(bot, trigger):
 
 
 @commands('search')
-@example('.search sopel bot', r'(https?:\/\/sopel\.chat\/? \(b, d\)|https?:\/\/sopel\.chat\/? \(b\), https?:\/\/sopel\.chat\/? \(d\))', re=True)
+@example('&search sopel bot', r'(https?:\/\/sopel\.chat\/? \(b, d\)|https?:\/\/sopel\.chat\/? \(b\), https?:\/\/sopel\.chat\/? \(d\))', re=True)
 def search(bot, trigger):
     """Searches Bing and Duck Duck Go."""
     if not trigger.group(2):
-        return bot.reply('.search for what?')
+        return bot.reply('Search for what?')
     query = trigger.group(2)
     bu = bing_search(query) or '-'
     du = duck_search(query) or '-'
@@ -134,9 +133,9 @@ def search(bot, trigger):
 
 
 @commands('suggest')
-@example('.suggest wikip', 'wikipedia')
-@example('.suggest ', 'No query term.')
-@example('.suggest lkashdfiauwgeaef', 'Sorry, no result.')
+@example('&suggest wikip', 'wikipedia')
+@example('&suggest ', 'No query term.')
+@example('&suggest lkashdfiauwgeaef', 'Sorry, no result.')
 def suggest(bot, trigger):
     """Suggest terms starting with given input"""
     if not trigger.group(2):

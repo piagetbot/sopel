@@ -41,7 +41,7 @@ def setup(bot):
 @sopel.module.require_admin
 @sopel.module.commands('join')
 @sopel.module.priority('low')
-@sopel.module.example('.join #example or .join #example key')
+@sopel.module.example('&join #example or .join #example key')
 def join(bot, trigger):
     """Join the specified channel. This is an admin-only command."""
     channel, key = trigger.group(3), trigger.group(4)
@@ -57,7 +57,7 @@ def join(bot, trigger):
 @sopel.module.require_admin
 @sopel.module.commands('part')
 @sopel.module.priority('low')
-@sopel.module.example('.part #example')
+@sopel.module.example('&part #example')
 def part(bot, trigger):
     """Part the specified channel. This is an admin-only command."""
     channel, _sep, part_msg = trigger.group(2).partition(' ')
@@ -84,7 +84,7 @@ def quit(bot, trigger):
 @sopel.module.require_admin
 @sopel.module.commands('msg')
 @sopel.module.priority('low')
-@sopel.module.example('.msg #YourPants Does anyone else smell neurotoxin?')
+@sopel.module.example('&msg #YourPants Does anyone else smell neurotoxin?')
 def msg(bot, trigger):
     """
     Send a message to a given channel or nick. Can only be done in privmsg by an
@@ -98,7 +98,7 @@ def msg(bot, trigger):
     if not channel or not message:
         return
 
-    bot.msg(channel, message)
+    bot.say(message, channel)
 
 
 @sopel.module.require_privmsg
@@ -111,16 +111,11 @@ def me(bot, trigger):
     by an admin.
     """
     if trigger.group(2) is None:
-        return
-
-    channel, _sep, action = trigger.group(2).partition(' ')
-    action = action.strip()
-    if not channel or not action:
-        return
-
-    msg = '\x01ACTION %s\x01' % action
-    bot.msg(channel, msg)
-
+        return bot.reply('Give me a channel and a message to say')
+    else:
+        msg = trigger.group(2)
+        channel = trigger.group(3)
+        bot.action(msg, channel)
 
 @sopel.module.event('INVITE')
 @sopel.module.rule('.*')
@@ -160,11 +155,9 @@ def mode(bot, trigger):
     mode = trigger.group(3)
     bot.write(('MODE ', bot.nick + ' ' + mode))
 
-
-@sopel.module.require_privmsg("This command only works as a private message.")
 @sopel.module.require_admin("This command requires admin privileges.")
 @sopel.module.commands('set')
-@sopel.module.example('.set core.owner Me')
+@sopel.module.example('&set core.owner Me')
 def set_config(bot, trigger):
     """See and modify values of sopels config object.
 
@@ -199,7 +192,7 @@ def set_config(bot, trigger):
             return
         # Except if the option looks like a password. Censor those to stop them
         # from being put on log files.
-        if option.endswith("password") or option.endswith("pass"):
+        if option.endswith("password") or option.endswith("pass") or option.endswith("key"):
             value = "(password censored)"
         else:
             value = getattr(section, option)
@@ -223,7 +216,16 @@ def set_config(bot, trigger):
 @sopel.module.require_privmsg
 @sopel.module.require_admin
 @sopel.module.commands('save')
-@sopel.module.example('.save')
+@sopel.module.example('&save')
 def save_config(bot, trigger):
     """Save state of sopels config object to the configuration file."""
+    bot.reply('Doing...')
     bot.config.save()
+    bot.reply('Done.')
+
+@sopel.module.commands('admins')
+@sopel.module.example('&admins')
+def get_admins(bot, trigger):
+    """Get admins of the bot."""
+    value = bot.config.core.admins
+    bot.reply("%s" % (value))

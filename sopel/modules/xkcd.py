@@ -28,9 +28,9 @@ sites_query = ' site:xkcd.com -site:' + ' -site:'.join(ignored_sites)
 
 def get_info(number=None, verify_ssl=True):
     if number:
-        url = 'http://xkcd.com/{}/info.0.json'.format(number)
+        url = 'https://xkcd.com/{}/info.0.json'.format(number)
     else:
-        url = 'http://xkcd.com/info.0.json'
+        url = 'https://xkcd.com/info.0.json'
     data = requests.get(url, verify=verify_ssl).json()
     data['url'] = 'http://xkcd.com/' + str(data['num'])
     return data
@@ -48,7 +48,7 @@ def google(query):
 @commands('xkcd')
 def xkcd(bot, trigger):
     """
-    .xkcd - Finds an xkcd comic strip. Takes one of 3 inputs:
+    &xkcd - Finds an xkcd comic strip. Takes one of 3 inputs:
     If no input is provided it will return a random comic
     If numeric input is provided it will return that comic, or the nth-latest
     comic if the number is non-positive

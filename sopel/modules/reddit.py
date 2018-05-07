@@ -2,6 +2,7 @@
 # Author: Elsie Powell, embolalia.com
 from __future__ import unicode_literals, absolute_import, print_function, division
 
+import sopel.config
 from sopel.module import commands, rule, example, require_chanmsg, NOLIMIT, OP
 from sopel.formatting import bold, color, colors
 from sopel.web import USER_AGENT
@@ -21,7 +22,6 @@ else:
     from HTMLParser import HTMLParser
     unescape = HTMLParser().unescape
 
-
 domain = r'https?://(?:www\.|np\.)?reddit\.com'
 post_url = '%s/r/(.*?)/comments/([\w-]+)' % domain
 user_url = '%s/u(ser)?/([\w-]+)' % domain
@@ -32,18 +32,26 @@ spoiler_subs = [
     'onepunchman',
 ]
 
+from sopel.config.types import StaticSection, ValidatedAttribute
+class RedditSection(StaticSection):
+    client_id = ValidatedAttribute('client_id', str)
+    client_secret = ValidatedAttribute('client_secret', str)
 
 def setup(bot):
+    bot.config.define_section('reddit', RedditSection)
     if not bot.memory.contains('url_callbacks'):
         bot.memory['url_callbacks'] = SopelMemory()
     bot.memory['url_callbacks'][post_regex] = rpost_info
     bot.memory['url_callbacks'][user_regex] = redditor_info
 
+def configure(config):
+    config.define_section('reddit', RedditSection, validate=False)
+    config.reddit.configure_setting('client_id', 'Please enter a Reddit API client ID.')
+    config.reddit.configure_setting('client_secret', 'Please enter a Reddit API client secret.')
 
 def shutdown(bot):
     del bot.memory['url_callbacks'][post_regex]
     del bot.memory['url_callbacks'][user_regex]
-
 
 @rule('.*%s.*' % post_url)
 def rpost_info(bot, trigger, match=None):
@@ -111,7 +119,7 @@ def rpost_info(bot, trigger, match=None):
 
 # If you change this, you'll have to change some other things...
 @commands('redditor')
-@example('.redditor poem_for_your_sprog')
+@example('&redditor poem_for_your_sprog')
 def redditor_info(bot, trigger, match=None):
     """Show information about the given Redditor"""
     commanded = re.match(bot.config.core.prefix + 'redditor', trigger)
@@ -167,10 +175,10 @@ def auto_redditor_info(bot, trigger):
     redditor_info(bot, trigger)
 
 
-@require_chanmsg('.setsfw is only permitted in channels')
+@require_chanmsg('&setsfw is only permitted in channels')
 @commands('setsafeforwork', 'setsfw')
-@example('.setsfw true')
-@example('.setsfw false')
+@example('&setsfw true')
+@example('&setsfw false')
 def update_channel(bot, trigger):
     """
     Sets the Safe for Work status (true or false) for the current
@@ -191,7 +199,7 @@ def update_channel(bot, trigger):
 
 
 @commands('getsafeforwork', 'getsfw')
-@example('.getsfw [channel]')
+@example('&getsfw [channel]')
 def get_channel_sfw(bot, trigger):
     """
     Gets the preferred channel's Safe for Work status, or the current

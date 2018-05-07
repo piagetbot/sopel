@@ -14,8 +14,8 @@ if sys.version_info.major >= 3:
 
 
 @commands('u')
-@example('.u ‽', 'U+203D INTERROBANG (‽)')
-@example('.u 203D', 'U+203D INTERROBANG (‽)')
+@example('&u ‽', 'U+203D INTERROBANG (‽)')
+@example('&u 203D', 'U+203D INTERROBANG (‽)')
 def codepoint(bot, trigger):
     arg = trigger.group(2)
     if not arg:

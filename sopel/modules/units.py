@@ -33,9 +33,9 @@ def k_to_c(temp):
 
 
 @commands('temp')
-@example('.temp 100F', '37.78°C = 100.00°F = 310.93K')
-@example('.temp 100C', '100.00°C = 212.00°F = 373.15K')
-@example('.temp 100K', '-173.15°C = -279.67°F = 100.00K')
+@example('&temp 100F', '37.78°C = 100.00°F = 310.93K')
+@example('&temp 100C', '100.00°C = 212.00°F = 373.15K')
+@example('&temp 100K', '-173.15°C = -279.67°F = 100.00K')
 def temperature(bot, trigger):
     """
     Convert temperatures
@@ -65,16 +65,16 @@ def temperature(bot, trigger):
 
 
 @commands('length', 'distance')
-@example('.distance 3m', '3.00m = 9 feet, 10.11 inches')
-@example('.distance 3km', '3.00km = 1.86 miles')
-@example('.distance 3 miles', '4.83km = 3.00 miles')
-@example('.distance 3 inch', '7.62cm = 3.00 inches')
-@example('.distance 3 feet', '91.44cm = 3 feet, 0.00 inches')
-@example('.distance 3 yards', '2.74m = 9 feet, 0.00 inches')
-@example('.distance 155cm', '1.55m = 5 feet, 1.02 inches')
-@example('.length 3 ly', '28382191417742.40km = 17635876112814.77 miles')
-@example('.length 3 au', '448793612.10km = 278867421.71 miles')
-@example('.length 3 parsec', '92570329129020.20km = 57520535754731.61 miles')
+@example('&distance 3m', '3.00m = 9 feet, 10.11 inches')
+@example('&distance 3km', '3.00km = 1.86 miles')
+@example('&distance 3 miles', '4.83km = 3.00 miles')
+@example('&distance 3 inch', '7.62cm = 3.00 inches')
+@example('&distance 3 feet', '91.44cm = 3 feet, 0.00 inches')
+@example('&distance 3 yards', '2.74m = 9 feet, 0.00 inches')
+@example('&distance 155cm', '1.55m = 5 feet, 1.02 inches')
+@example('&length 3 ly', '28382191417742.40km = 17635876112814.77 miles')
+@example('&length 3 au', '448793612.10km = 278867421.71 miles')
+@example('&length 3 parsec', '92570329129020.20km = 57520535754731.61 miles')
 def distance(bot, trigger):
     """
     Convert distances

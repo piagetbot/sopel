@@ -1,4 +1,4 @@
-# coding=utf-8
+﻿# coding=utf-8
 """GeoIP lookup module"""
 # Copyright 2011, Dimitri Molenaars, TyRope.nl,
 # Copyright © 2013, Elad Alfassa <elad@fedoraproject.org>
@@ -90,8 +90,9 @@ def _find_geoip_db(bot):
         return False
 
 
-@commands('iplookup', 'ip')
-@example('.ip 8.8.8.8',
+<<<<<<< HEAD
+@commands('iplookup1', 'ip1')
+@example('&ip1 8.8.8.8',
          r'[IP/Host Lookup] Hostname: google-public-dns-a.google.com | Location: United States | ISP: AS15169 Google LLC',
          re=True,
          ignore='Downloading GeoIP database, please wait...')

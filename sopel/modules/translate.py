@@ -42,6 +42,7 @@ def translate(text, in_lang='auto', out_lang='en', verify_ssl=True):
         "dt": "t",
         "q": text,
     }
+
     url = "http://translate.googleapis.com/translate_a/single"
     result = requests.get(url, params=query, timeout=40, headers=headers,
                           verify=verify_ssl).text
@@ -57,7 +58,6 @@ def translate(text, in_lang='auto', out_lang='en', verify_ssl=True):
 
     if raw:
         return str(data), 'en-raw'
-
     try:
         language = data[2]  # -2][0][0]
     except IndexError:
@@ -99,9 +99,9 @@ def tr(bot, trigger):
 
 
 @commands('translate', 'tr')
-@example('.tr :en :fr my dog', '"mon chien" (en to fr, translate.google.com)')
-@example('.tr היי', '"Hey" (iw to en, translate.google.com)')
-@example('.tr mon chien', '"my dog" (fr to en, translate.google.com)')
+@example('&tr :en :fr my dog', '"mon chien" (en to fr, translate.google.com)')
+@example('&tr היי', '"Hey" (iw to en, translate.google.com)')
+@example('&tr mon chien', '"my dog" (fr to en, translate.google.com)')
 def tr2(bot, trigger):
     """Translates a phrase, with an optional language hint."""
     command = trigger.group(2)

@@ -27,13 +27,13 @@ BASE_TUMBOLIA_URI = 'https://tumbolia-sopel.appspot.com/'
 
 
 @commands('c', 'calc')
-@example('.c 5 + 3', '8')
-@example('.c 0.9*10', '9')
-@example('.c 10*0.9', '9')
-@example('.c 2*(1+2)*3', '18')
-@example('.c 2**10', '1024')
-@example('.c 5 // 2', '2')
-@example('.c 5 / 2', '2.5')
+@example('&c 5 + 3', '8')
+@example('&c 0.9*10', '9')
+@example('&c 10*0.9', '9')
+@example('&c 2*(1+2)*3', '18')
+@example('&c 2**10', '1024')
+@example('&c 5 // 2', '2')
+@example('&c 5 / 2', '2.5')
 def c(bot, trigger):
     """Evaluate some calculation."""
     if not trigger.group(2):
@@ -51,7 +51,7 @@ def c(bot, trigger):
 
 
 @commands('py')
-@example('.py len([1,2,3])', '3')
+@example('&py len([1,2,3])', '3')
 def py(bot, trigger):
     """Evaluate a Python expression."""
     if not trigger.group(2):

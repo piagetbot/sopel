@@ -19,7 +19,7 @@ from sopel.module import commands, example
 
 
 @commands('spellcheck', 'spell')
-@example('.spellcheck stuff')
+@example('&spellcheck stuff')
 def spellcheck(bot, trigger):
     """
     Says whether the given word is spelled correctly, and gives suggestions if

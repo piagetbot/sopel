@@ -75,7 +75,7 @@ def etymology(word):
 
 
 @commands('ety')
-@example('.ety word')
+@example('&ety word')
 def f_etymology(bot, trigger):
     """Look up the etymology of a word"""
     word = trigger.group(2)
@@ -84,15 +84,15 @@ def f_etymology(bot, trigger):
         result = etymology(word)
     except IOError:
         msg = "Can't connect to etymonline.com (%s)" % (etyuri % word)
-        bot.msg(trigger.sender, msg)
+        bot.say(msg, trigger.sender)
         return NOLIMIT
     except (AttributeError, TypeError):
         result = None
 
     if result is not None:
-        bot.msg(trigger.sender, result)
+        bot.say(result, trigger.sender)
     else:
         uri = etysearch % word
         msg = 'Can\'t find the etymology for "%s". Try %s' % (word, uri)
-        bot.msg(trigger.sender, msg)
+        bot.say(msg, trigger.sender)
         return NOLIMIT

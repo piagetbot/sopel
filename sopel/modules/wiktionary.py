@@ -12,7 +12,7 @@ import re
 from sopel import web
 from sopel.module import commands, example
 
-uri = 'http://en.wiktionary.org/w/index.php?title=%s&printable=yes'
+uri = 'https://en.wiktionary.org/w/index.php?title=%s&printable=yes'
 r_tag = re.compile(r'<[^>]+>')
 r_ul = re.compile(r'(?ims)<ul>.*?</ul>')
 
@@ -77,8 +77,8 @@ def format(result, definitions, number=2):
     return result.strip(' .,')
 
 
-@commands('wt', 'define', 'dict')
-@example('.wt bailiwick')
+@commands('wt', 'define', 'dict', 'wiktionary')
+@example('&wt bailiwick')
 def wiktionary(bot, trigger):
     """Look up a word on Wiktionary."""
     word = trigger.group(2)

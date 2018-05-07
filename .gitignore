@@ -32,3 +32,6 @@ sopel.egg-info/*
 
 # macOS
 *.DS_Store
+
+# autoenv
+.env
